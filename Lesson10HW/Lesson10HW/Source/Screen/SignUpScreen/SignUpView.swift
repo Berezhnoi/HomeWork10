@@ -26,8 +26,46 @@ class SignUpView: UIView {
     // MARK: - Buttons
     @IBOutlet weak var signUpButton: UIButton!
     
+    override func awakeFromNib() {
+         super.awakeFromNib()
+         setupInputFields()
+     }
+    
+    
+    // MARK: - Setting up the keyboard types and other configurations
+    private func setupInputFields() {
+        // Email
+        emailNameTextField.keyboardType = .emailAddress
+        
+        // Card
+        cardNumberTextField.keyboardType = .numberPad
+        cvvTextField.keyboardType = .numberPad
+        cvvTextField.isSecureTextEntry = true
+        
+        // Password
+        passwordTextField.isSecureTextEntry = true
+        confirmPasswordTextField.isSecureTextEntry = true
+    }
+    
+    func getTextFields() -> [UITextField] {
+        return [
+            firstNameTextField,
+            lastNameTextField,
+            emailNameTextField,
+            passwordTextField,
+            confirmPasswordTextField,
+            countryTextField,
+            cityTextField,
+            addressTextField,
+            cardNumberTextField,
+            expDateTextField,
+            cvvTextField
+        ]
+    }
+    
     // MARK: - Actions
     @IBAction func signUpButtonAction(_ sender: UIButton) {
-        
+        // This will force the view to resign the first responder status, hiding the keyboard
+        self.endEditing(true)
     }
 }
